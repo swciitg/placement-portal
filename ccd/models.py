@@ -12,7 +12,6 @@ import binascii
 # When the user uploads the file, generate a hard to guess path for it as anyone can access this file using its url
 def get_upload_path(instance, filename):
     path = os.path.join('admin-files',binascii.hexlify(os.urandom(32)).decode(), slugify(instance.name))
-    print(path)
     return path
 
 class File(models.Model):

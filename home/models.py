@@ -18,6 +18,9 @@ from django.core.validators import MaxValueValidator,MinValueValidator
 # 	('Mathematics','Mathematics'),
 # 	('Design','Design'),
 # 	('Others','Others'),
+# 	('Energy','Energy'),
+# 	('DS','DS'),
+# 	('MSR Emobility','Others'),
 # ]
 
 class Branch(models.Model):

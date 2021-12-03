@@ -41,8 +41,6 @@ def ajax_get_file_list(request):
 @login_required
 @user_passes_test(is_ccd_member, login_url="home:permission_not_granted")
 def ajax_upload_file(request):
-    # print(request.method)
-    # print(request.is_ajax())
     if request.is_ajax():
         if request.method == 'POST':
             form = FileUploadForm(data=request.POST, files=request.FILES)
@@ -60,10 +58,8 @@ def save_file_form(request,form):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            print("form is valid")
             data['success']=True
         else:
-            print('form is invalid')
             data['success']=False
     context = {'form':form}
     data['form_html'] = render_to_string(template,context,request=request,)
@@ -110,13 +106,10 @@ def ajax_update_database(request):
     context['success']=False
     if request.is_ajax() and request.method=='POST':
         data = json.loads(request.body)
-        # print(data)
         update_type =data['update_type']
-        # print(update_type)
         headings = data['headings']
-        # print(headings)
         data_list = data['data_list']
-        # print(data_list[:2])
+
         d = {    
             "Name":"name",
             "Roll No.":"roll",
@@ -136,6 +129,7 @@ def ajax_update_database(request):
             for i in range(len(data_list)):
                 if(len(data_list[i])!=len(headings)):
                     print("list length error for row {}!".format(i+1))
+                    print(data_list[i])
                     pass
                 else:
                     student_dict = {}
@@ -276,10 +270,8 @@ def student_update(request,pk):
     if request.is_ajax():
         student = get_object_or_404(Student,pk=pk)
         if request.method == 'POST':
-            # print("post student")
             form = StudentForm(request.POST,instance=student)
         else:
-            # print("get student")
             form = StudentForm(instance=student)
         return save_student_form(request,form,'ccd/partial_student_update.html')
 
