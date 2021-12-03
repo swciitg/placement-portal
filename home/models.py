@@ -34,7 +34,7 @@ class Branch(models.Model):
 
 class Student(models.Model):
 	name = models.CharField(max_length=200)
-	roll=models.CharField(max_length=50, unique= True)
+	roll=models.IntegerField(unique= True)
 
 	PROGRAM_CHOICES = [
         ('B.Tech', 'Bachelor of Technology'),
