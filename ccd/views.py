@@ -119,10 +119,10 @@ def ajax_update_database(request):
             "Company":'company',
             "Placed":'placed',
             # "Sector":'sector',
-            # "Profile":'profile',
+            "Profile":'profile',
             "Slot":'slot',
         }
-        headings_required = ["Name", "Roll No.", "Program", "Branch", "Day", "Company", "Placed", "Slot"]
+        headings_required = ["Name", "Roll No.", "Program", "Branch", "Day", "Company", "Placed","Profile", "Slot"]
         # headings_required = ["Name", "Roll No.", "Program", "Branch", "Day", "Company", "Placed", "Sector", "Profile", "Slot"]
 
         if sorted(headings)==sorted(headings_required):
@@ -158,7 +158,7 @@ def ajax_update_database(request):
                                 obj.company = student_dict['company']
                                 obj.placed = student_dict['placed']
                                 # obj.sector = student_dict['sector']
-                                # obj.profile = student_dict['profile']
+                                obj.profile = student_dict['profile']
                                 obj.slot = student_dict['slot']
                                 obj.save()
                             else:
@@ -178,7 +178,7 @@ def ajax_update_database(request):
                                 obj.company = student_dict['company']
                                 obj.placed = student_dict['placed']
                                 # obj.sector = student_dict['sector']
-                                # obj.profile = student_dict['profile']
+                                obj.profile = student_dict['profile']
                                 obj.slot = student_dict['slot']
                                 obj.save()
                             else:
