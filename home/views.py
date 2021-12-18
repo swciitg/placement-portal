@@ -26,9 +26,9 @@ COMPANY_COUNT=70
 def charts(request):
 
 	branches = ["CSE", "MNC", "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
-	dens_btech={"CSE":100,"MNC":66,"EE":146,"ME":100,"CL":67,"EP":47,"CST":45,"BT":44,"Design":45,"CE":84}
-	dens_mtech={"CSE":66,"BT":51,"EE":90,"ME":123,"CE":123,"Design":31,"CL":60,"DS":20}
-	dens_others={"M.A Humanities":54,"M.S Energy":15,"M.Sc Physics":56,"M.Sc Chemistry":59,"M.Sc Mathematics":58}
+	dens_btech={"CSE":97,"MNC":62,"EE":130,"ME":88,"CL":60,"EP":34,"CST":38,"BT":33,"Design":38,"CE":73}
+	dens_mtech={"CSE":59,"BT":19,"EE":68,"ME":95,"CE":83,"Design":31,"CL":52,"DS":14}
+	dens_others={"M.A Humanities":24,"M.S Energy":11,"M.Sc Physics":4,"M.Sc Chemistry":19,"M.Sc Mathematics":24}
 	btech_total=0
 	mtech_total=0
 	others_total=0
