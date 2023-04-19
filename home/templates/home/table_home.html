@@ -562,7 +562,7 @@ Table
 									<div class="form-group">
 										<label for="year">Year</label>
 										<select class="form-control" id="year_filter" style="border-color: #7774e7;">
-											<option selected="true" value="all">All</option>
+											{% comment %} <option selected="true" value="all">All</option> {% endcomment %}
 											{% for x in years %}
 												<option value={{x}}>{{x}}</option>
 											{%endfor%}

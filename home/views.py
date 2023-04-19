@@ -232,7 +232,7 @@ def get_table(request):
 	if company:
 		students  = Student.objects.filter(company=company)
 	else:
-		students  = Student.objects.filter(placed=True)
+		students  = Student.objects.filter(placed=True, year_placed="2023")
 	students = Paginator(students, 5)
 	page_number = request.GET.get('page')
 	branches = Branch.objects.all()
