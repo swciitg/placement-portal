@@ -9,7 +9,7 @@ from django.db.models.functions import Lower
 from django.template.loader import render_to_string
 from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
+# from django.core.paginator import Paginator
 import json
 
 
@@ -233,8 +233,8 @@ def get_table(request):
 		students  = Student.objects.filter(company=company)
 	else:
 		students  = Student.objects.filter(placed=True, year_placed="2023")
-	students = Paginator(students, 5)
-	page_number = request.GET.get('page')
+	# students = Paginator(students, 5)
+	# page_number = request.GET.get('page')
 	branches = Branch.objects.all()
 	context = {'students':students,'branches':branches, "years": all_years}
 	return render(request,'home/table_home.html',context)
