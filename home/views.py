@@ -9,6 +9,7 @@ from django.db.models.functions import Lower
 from django.template.loader import render_to_string
 from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 import json
 
 
@@ -31,15 +32,15 @@ def charts(request):
 	
 	branches = ["CSE", "MNC", "EE", "ME", "CE", "CL", "EP", "CST", "BT", "DS","Physics", "Chemistry", "Mathematics", "Design", "Others"]
 	dens_btech={
-		'2022' : {"CSE":83,"MNC":56, "EE":116, "ME":70,"CL":58,"EP":22,"CST":38,"BT":49,"Design":26,"CE":52},
+		'2022' : {"CSE":97,"MNC":62, "EE":130, "ME":88,"CL":60,"EP":34,"CST":38,"BT":33,"Design":38,"CE":73},
 		'2023' : {"CSE":108,"MNC":68 , "EE":154, "ME":101,"CL":69,"Physics":42,"CST":43,"BT":55,"Design":50,"CE":79}
 	}
 	dens_mtech={
-		'2022':{"CSE":54,"BT":38,"EE":74,"ME":103,"CE":85,"Design":33,"CL":68,"DS":18},
+		'2022':{"CSE":59,"BT":19,"EE":68,"ME":95,"CE":83,"Design":31,"CL":52,"DS":14},
 		'2023' : {"ME"	:3, "CST"	:3, "Development Studies"	:0, "School of Agro and Rural Technology"	:11, "BT"	:30, "CL"	:2, "Petroleum Science and Technology"	:29, "Chemistry"	:0, "Physics"	:0, "Robotics and Artificial Intelligence"	:16, "Data Science"	:13, "ECE"	:2, "CE"	:4, "CSE"	:59, "Design"	:4, "EP"	:0, "Materials Science and Technology"	:26, "Environment Engineering"	:17, "Geotechnical Engineering"	:17, "Energy"	:0, "Mathematics"	:2, "EEE"	:1, "MNC"	:2, "Manufacturing Science & Engineering"	:18, "Aerodynamics & Propulsion"	:8, "E-Mobility"	:1, "Computational Mechanics"	:8, "Fluids and Thermal Engineering"	:25, "Machine Design"	:24, "Infrastructure Engineering & Management"	:4, "Transportation Systems Engineering"	:17, "Communication Engineering"	:16, "VLSI"	:12, "Power Engineering"	:8, "Systems control & automation"	:3, "Structural Engineering"	:14, "SPML"	:16, "Biotechnology"	:0, "RF & Photonics"	:7, "Water Resources Engineering & Management"	:16, "Earth Systems Science and Engineering"	:8, "Disaster Mangement and Risk Reduction"	:0, "Food Science and Technology"	:5}
 		}
 	dens_others={
-		'2022':{"Humanities":34,"Energy":8,"Physics":14,"Chemistry":22,"Mathematics":30},
+		'2022':{"Humanities":24,"Energy":11,"Physics":5,"Chemistry":19,"Mathematics":23},
 		'2023':{"Development Studies":	41,"Energy":	14,"Disaster Mangement and Risk Reduction":	9,"E-Mobility":	4,"EE":	2,"Manufacturing Science & Engineering":	1, "CSE" : 1, "Chemistry":29, "Physics": 23, "BT" : 2, "Design": 2, "Data Science": 1, "Mathematics":47}
 	}
 	years = request.GET.get('year')
@@ -232,7 +233,8 @@ def get_table(request):
 		students  = Student.objects.filter(company=company)
 	else:
 		students  = Student.objects.filter(placed=True)
-
+	students = Paginator(students, 5)
+	page_number = request.GET.get('page')
 	branches = Branch.objects.all()
 	context = {'students':students,'branches':branches, "years": all_years}
 	return render(request,'home/table_home.html',context)
