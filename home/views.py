@@ -37,11 +37,11 @@ def charts(request):
 	}
 	dens_mtech={
 		'2022':{"CSE":59,"BT":19,"EE":68,"ME":95,"CE":83,"Design":31,"CL":52,"DS":14},
-		'2023':{"BT": 35, "CE": 94, "CL": 57, "CSE" : 60, "EE":68, "Interdisciplinary" : 20, "ME": 90}
+		'2023':{"BT": 35, "CE": 94, "CL": 57, "CSE" : 60, "EE":68, "Interdisciplinary" : 20, "ME": 90, "oth" : 27}
 		}
 	dens_others={
 		'2022':{"Humanities":24,"Energy":11,"Physics":5,"Chemistry":19,"Mathematics":23},
-		'2023':{"Development Studies":	41,"Energy":	14,"Disaster Mangement and Risk Reduction":	9,"E-Mobility":	4,"EE":	2,"Manufacturing Science & Engineering":	1, "CSE" : 1, "Chemistry":29, "Physics": 23, "BT" : 2, "Design": 2, "Data Science": 1, "Mathematics":47}
+		'2023':{"HSS":41, "Physics" : 23, "CST": 29, "MNC": 54, "Interdisciplinary" : 7, "Othersss" : 23}
 	}
 	years = request.GET.get('year')
 	if years is None:
