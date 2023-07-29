@@ -9,4 +9,4 @@ class Admin(admin.ModelAdmin):
     ordering = ('updated_at',)
 
 
-admin.site.site_url = "/placement-stats"
+admin.site.site_url = "/intern-stats"

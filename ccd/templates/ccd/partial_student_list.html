@@ -20,7 +20,7 @@
           <button type="button"
                   class="btn btn-sm btn-outline-warning waves-effect btn-sm js-update-student-btn "
                   data-url="{% url 'ccd:student_update' student.id %}"
-                   data-toggle="tooltip" data-placement="top" title="Edit details">
+                   data-toggle="tooltip" data-intern="top" title="Edit details">
             <i class="fas fa-edit mr-1"></i>
           </button>
         </td>
@@ -28,7 +28,7 @@
           <button type="button"
                   class="btn btn-sm btn-outline-danger waves-effect js-delete-student-btn"
                   data-url="{% url 'ccd:student_delete' student.id %}"
-                   data-toggle="tooltip" data-placement="top" title="Delete student">
+                   data-toggle="tooltip" data-intern="top" title="Delete student">
             <i class="fa fa-trash mr-1" aria-hidden="true"></i>
 
           </button>

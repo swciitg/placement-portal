@@ -605,7 +605,7 @@ window.addEventListener('load', () => {
         <div class="col">
             <p>
                 <!-- BUTTON TO TRIGGER THE ACTION -->
-                <button type="button" class="btn btn-primary js-create-student-btn" data-url="{% url 'ccd:student_create' %}" data-toggle="tooltip" data-placement="top" title="Add a new student">
+                <button type="button" class="btn btn-primary js-create-student-btn" data-url="{% url 'ccd:student_create' %}" data-toggle="tooltip" data-intern="top" title="Add a new student">
                 <i class="fas fa-user-plus mr-1"></i>
                     Add Student
                 </button>
@@ -853,7 +853,7 @@ window.addEventListener('load', () => {
     // function to get all files using ajax and update the files list html
     var loadFilesList = function() {
         $.ajax({
-            url: '/placement-stats/ccd/files',
+            url: '/intern-stats/ccd/files',
             type: 'get',
             dataType: 'json',
             success: function(data) {
@@ -898,7 +898,7 @@ window.addEventListener('load', () => {
     // function to load FileForm
     var loadFileForm = function() {
         $.ajax({
-            url: '/placement-stats/ccd/ajax/upload-file',
+            url: '/intern-stats/ccd/ajax/upload-file',
             type: 'get',
             dataType: 'json',
             // beforeSend: function() {
@@ -918,7 +918,7 @@ window.addEventListener('load', () => {
         var formData = new FormData(this);
         // var form = $(this);
         $.ajax({
-            url: '/placement-stats/ccd/ajax/upload-file',
+            url: '/intern-stats/ccd/ajax/upload-file',
             data: formData,
             type: 'post',
             cache: false,
@@ -1186,7 +1186,7 @@ window.addEventListener('load', () => {
         var program = $('#program_filter').val();
         var sortid = $('#sort').val();
         $.ajax({
-            url: '/placement-stats/ccd/ajax/filter/',
+            url: '/intern-stats/ccd/ajax/filter/',
             type: 'GET',
             data: {
                 'branch': branch,
@@ -1287,7 +1287,7 @@ window.addEventListener('load', () => {
                     var update_type = $('#update_type').val();
                     $.ajax({
                         contentType: 'application/json; charset=utf-8',
-                        url: '/placement-stats/ccd/ajax/update-database',
+                        url: '/intern-stats/ccd/ajax/update-database',
                         type: 'POST',
                         data: JSON.stringify({
                             'headings': headings,

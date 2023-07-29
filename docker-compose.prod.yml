@@ -5,9 +5,9 @@ services:
     restart: unless-stopped
     build:
       context: .
-    image: placement_stats
+    image: intern_stats
     command: sh -c /app/entrypoint.prod
-    container_name: placement_stats
+    container_name: intern_stats
     volumes:
         - "./db.sqlite3:/app/db.sqlite3"
     ports:

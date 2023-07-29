@@ -1,1 +1,1 @@
-web: gunicorn placement.wsgi
+web: gunicorn intern.wsgi

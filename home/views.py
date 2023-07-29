@@ -139,9 +139,9 @@ def charts(request):
 		tmp["urlval"]=i.replace(' ','%20')
 		comp_count_lis_others.append(tmp)
 
-	btech_branchwise_placements=[]
-	mtech_branchwise_placements = []
-	others_branchwise_placements=[]
+	btech_branchwise_interns=[]
+	mtech_branchwise_interns = []
+	others_branchwise_interns=[]
 
 	for bch in branches:
 		tmp={}
@@ -164,7 +164,7 @@ def charts(request):
 		tmp["value"] = round((num/den)*100,2)
 		tmp["num"]=num
 		tmp["den"]=den
-		btech_branchwise_placements.append(tmp)
+		btech_branchwise_interns.append(tmp)
 	for bch in branches:
 		tmp = {}
 		tmp["group"] = bch
@@ -186,7 +186,7 @@ def charts(request):
 		tmp["value"] = round((num/den)*100,2)
 		tmp["num"]=num
 		tmp["den"]=den
-		mtech_branchwise_placements.append(tmp)
+		mtech_branchwise_interns.append(tmp)
 
 	for i in dens_others[years]:
 
@@ -202,15 +202,15 @@ def charts(request):
 		tmp["value"] = round((num/den)*100,2)
 		tmp["num"]=num
 		tmp["den"]=den
-		others_branchwise_placements.append(tmp)
+		others_branchwise_interns.append(tmp)
 
 	context = {
 			"btech_percent_placed": btech_percent_placed,
 			"mtech_percent_placed": mtech_percent_placed,
 			"others_percent_placed":others_percent_placed,
-			"btech_branchwise_placements": json.dumps(btech_branchwise_placements),
-			"mtech_branchwise_placements": json.dumps(mtech_branchwise_placements),
-			"others_branchwise_placements":json.dumps(others_branchwise_placements),
+			"btech_branchwise_interns": json.dumps(btech_branchwise_interns),
+			"mtech_branchwise_interns": json.dumps(mtech_branchwise_interns),
+			"others_branchwise_interns":json.dumps(others_branchwise_interns),
 			"company_count":comp_count_lis_btech,
 			"company_count_mtech":comp_count_lis_mtech,
 			"company_count_others":comp_count_lis_others,

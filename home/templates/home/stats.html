@@ -59,7 +59,7 @@ Charts
 
     <a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img
         style="max-width: 35px;max-height: 35px;"
-        src="{% static 'images/logo.png' %}">Placement Statistics</a>
+        src="{% static 'images/logo.png' %}">Intern Statistics</a>
         <div  id="year_form" >
     
           <select class="form-control year_dropdown"  style="border-color: #7774e7;">
@@ -148,7 +148,7 @@ Charts
 </div>
 
 {% comment %} <h1  style=" margin-top:70px;text-align: center;font-family: 'Segoe UI' , Tahoma, Geneva, Verdana,
-      sans-serif;font-size:2em;" id="heading-text"> B.Tech Placement statistics </h1> {% endcomment %}
+      sans-serif;font-size:2em;" id="heading-text"> B.Tech Intern statistics </h1> {% endcomment %}
 
 
 
@@ -242,12 +242,12 @@ Charts
           var data2 = {{ mtech_percent_placed| safe }};
           var btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
           var mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
-          var data3 = {{ btech_branchwise_placements| safe }};
-          var data4 = {{ mtech_branchwise_placements| safe }};
+          var data3 = {{ btech_branchwise_interns| safe }};
+          var data4 = {{ mtech_branchwise_interns| safe }};
           var data5 = {{ company_count| safe }};
           var data6 = {{ company_count_mtech| safe }};
           var data7 = {{ others_percent_placed| safe }};
-          var data8 = {{ others_branchwise_placements| safe}};
+          var data8 = {{ others_branchwise_interns| safe}};
           var data9 = {{ company_count_others| safe}};
           var others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
           var dropdown=document.getElementsByClassName('year_dropdown')[0];
@@ -255,19 +255,19 @@ Charts
           dropdown.addEventListener("click", function(e) {
             
 
-            fetch("/placement-stats/charts/?data=1&year="+dropdown.value)
+            fetch("/intern-stats/charts/?data=1&year="+dropdown.value)
               .then((response) => response.json())
               .then((data) => {
                 data1 = JSON.parse(data.btech_percent_placed);
                 data2 =JSON.parse(data.mtech_percent_placed);
                btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
                mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
-               data3 =JSON.parse(data.btech_branchwise_placements);
-               data4 = data.mtech_branchwise_placements;
+               data3 =JSON.parse(data.btech_branchwise_interns);
+               data4 = data.mtech_branchwise_interns;
                data5 = data.company_count;
                data6 = data.company_count_mtech;
                data7 = JSON.parse(data.others_percent_placed);
-               data8 = JSON.parse(data.others_branchwise_placements);
+               data8 = JSON.parse(data.others_branchwise_interns);
                data9 = data.company_count_others;
                others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
                 others();
@@ -281,19 +281,19 @@ Charts
           dropdown1.addEventListener("click", function(e) {
             
 
-            fetch("/placement-stats/charts/?data=1&year="+dropdown1.value)
+            fetch("/intern-stats/charts/?data=1&year="+dropdown1.value)
               .then((response) => response.json())
               .then((data) => {
                  data1 = JSON.parse(data.btech_percent_placed);
                  data2 =JSON.parse(data.mtech_percent_placed);
                 btech_placed_frac = data1["Placed"] / (data1["Placed"] + data1["Not placed"]);
                 mtech_placed_frac = data2["Placed"] / (data2["Placed"] + data2["Not placed"]);
-                data3 =JSON.parse(data.btech_branchwise_placements);
-                data4 = data.mtech_branchwise_placements;
+                data3 =JSON.parse(data.btech_branchwise_interns);
+                data4 = data.mtech_branchwise_interns;
                 data5 = data.company_count;
                 data6 = data.company_count_mtech;
                 data7 = JSON.parse(data.others_percent_placed);
-                data8 = JSON.parse(data.others_branchwise_placements);
+                data8 = JSON.parse(data.others_branchwise_interns);
                 data9 = data.company_count_others;
                 others_placed_frac = data7["Placed"] / (data7["Placed"] + data7["Not placed"]);
                 others();

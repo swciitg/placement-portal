@@ -14,7 +14,7 @@ import json
 
 # function to check if user is ccd member
 def is_ccd_member(user):
-    return user.is_superuser or user.is_staff or user.groups.filter(name = "placement team").exists()
+    return user.is_superuser or user.is_staff or user.groups.filter(name = "intern team").exists()
 
 ################################################################################
 # functions for the file manager

@@ -15,9 +15,9 @@
                     <td class="text-justify text-center font-weight-bold">{{file.name}}</td>
                     <td class="text-justify text-center font-weight-light font-italic">{{file.info}}</td>
                     <td class="text-center"><a href="{{file.file.url}}">
-                      <button type="button" class="btn btn-sm btn-outline-primary wave-effect" data-toggle="tooltip" data-placement="top" title="Download File {{file.name}}"><i class="fas fa-download"></i></button> </a></td>
+                      <button type="button" class="btn btn-sm btn-outline-primary wave-effect" data-toggle="tooltip" data-intern="top" title="Download File {{file.name}}"><i class="fas fa-download"></i></button> </a></td>
                     <td class="text-center">
-                        <button name="{{file.name}}" type="button" class="btn btn-sm btn-outline-danger waves-effect delete-file-btn" data-url="{% url 'ccd:delete-file' file.id %}" data-toggle="tooltip" data-placement="top" title="Delete File {{file.name}}">
+                        <button name="{{file.name}}" type="button" class="btn btn-sm btn-outline-danger waves-effect delete-file-btn" data-url="{% url 'ccd:delete-file' file.id %}" data-toggle="tooltip" data-intern="top" title="Delete File {{file.name}}">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </button></td>
                 </tr>

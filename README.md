@@ -1,7 +1,7 @@
 
-# placement-stats
+# intern-stats
 
-### A django portal for displaying placement statistics
+### A django portal for displaying intern statistics
 
 ### Features
 - Outlook authentication for privacy

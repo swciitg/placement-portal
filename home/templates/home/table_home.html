@@ -455,7 +455,7 @@ Table
 
 	<div class="container-fluid">
 
-		<a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Placement Statistics</a>
+		<a class="navbar-brand order-0 hov_class" href="{% url 'home:home' %}" style="cursor: pointer;"> <img style="max-width: 35px;max-height: 35px;" src="{% static 'images/logo.png' %}">Intern Statistics</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -784,7 +784,7 @@ Table
 		var year = $('#year_filter').val();
 		var sortid = $('#sort').val();
 		$.ajax({
-			url: '/placement-stats/ajax/tableFilter',
+			url: '/intern-stats/ajax/tableFilter',
 			type: 'GET',
 			data: {
 				'branch': branch,
