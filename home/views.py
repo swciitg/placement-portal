@@ -9,6 +9,8 @@ from django.db.models.functions import Lower
 from django.template.loader import render_to_string
 from django.utils.text import slugify
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.db.models import Q
 # from django.core.paginator import Paginator
 import json
 
@@ -227,22 +229,82 @@ def charts(request):
 # function to render the table
 
 @login_required
+def get_table_old(request):
+	company = request.GET.get('company')
+	if company:
+		students  = Student.objects.filter(company=company)
+	else:
+		students  = Student.objects.filter(placed=True, year_placed="2023")
+	branches = Branch.objects.all()
+	for brac in branches:
+		print(brac.branchName)
+	context = {'students':students,'branches':branches, "years": all_years}
+
+	return render(request,'home/table_home.html',context)
+
+
 def get_table(request):
 	company = request.GET.get('company')
 	if company:
 		students  = Student.objects.filter(company=company)
 	else:
 		students  = Student.objects.filter(placed=True, year_placed="2023")
-	# students = Paginator(students, 5)
-	# page_number = request.GET.get('page')
 	branches = Branch.objects.all()
-	context = {'students':students,'branches':branches, "years": all_years}
-	print("hello")
-	return render(request,'home/table_new.html',context)
-
+	return render(request,'home/table_new.html')
 ################################################################################
 
 # function to filter the table data
+
+@login_required
+def fetch_data(request):
+	# Parameters from the client-side
+	page = int(request.GET.get('page', 1))
+	page_size = int(request.GET.get('pageSize', 15))
+	filters = {
+		'search': request.GET.get('filters[search]', ''),
+		'branch': request.GET.get('filters[branch]', ''),
+		'program': request.GET.get('filters[program]', ''),
+		'year': request.GET.get('filters[year]', ''),
+	}
+	sort_column = request.GET.get('sortColumn', '')
+	sort_order = request.GET.get('sortOrder', '')
+
+	# Query based on filters
+	queryset = Student.objects.filter(placed=True)  # Replace YourModel with your actual model
+	if filters['search']:
+		# queryset = queryset.filter(name__icontains=filters['search'])
+		queryset = queryset.filter(
+			Q(name__icontains=filters['search']) |
+			Q(programs__icontains=filters['search']) |
+			Q(year_placed__icontains=filters['search']) |
+			Q(roll__icontains=filters['search']) |
+			Q(branch__branchName__icontains=filters['search']) |
+			Q(company__icontains=filters['search'])
+		)
+	if filters['branch'] and filters['branch'] != 'all':
+		branch = Branch.objects.get(branchName=filters['branch'])
+		queryset = queryset.filter(branch=branch)
+	if filters['program'] and filters['program'] != 'all':
+		queryset = queryset.filter(programs=filters['program'])
+	if filters['year'] and filters['year'] != 'all':
+		queryset = queryset.filter(year_placed=filters['year'])
+
+	# Sorting
+	if sort_column and sort_order == 'desc':
+		queryset = queryset.order_by(f"-{sort_column}")
+	elif sort_column and sort_order == 'asc':
+		queryset = queryset.order_by(f"{sort_column}")
+  
+	# Pagination
+	paginator = Paginator(queryset, page_size)
+	paginated_data = paginator.get_page(page)
+	for item in paginated_data:
+		print(item)
+	serialized_data = [{'name': item.name, 'program': item.programs, 'branch': item.branch.branchName, 
+						'rollNumber': item.roll, 'company': item.company, 
+						'profile': item.profile} for item in paginated_data]
+
+	return JsonResponse({'data': serialized_data, 'totalPages': paginator.num_pages})
 
 @login_required
 def ajax_table_filter(request):
