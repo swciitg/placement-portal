@@ -237,7 +237,8 @@ def get_table(request):
 	# page_number = request.GET.get('page')
 	branches = Branch.objects.all()
 	context = {'students':students,'branches':branches, "years": all_years}
-	return render(request,'home/table_home.html',context)
+	print("hello")
+	return render(request,'home/table_new.html',context)
 
 ################################################################################
 
