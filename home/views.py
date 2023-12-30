@@ -236,8 +236,6 @@ def get_table_old(request):
 	else:
 		students  = Student.objects.filter(placed=True, year_placed="2023")
 	branches = Branch.objects.all()
-	for brac in branches:
-		print(brac.branchName)
 	context = {'students':students,'branches':branches, "years": all_years}
 
 	return render(request,'home/table_home.html',context)
@@ -298,8 +296,7 @@ def fetch_data(request):
 	# Pagination
 	paginator = Paginator(queryset, page_size)
 	paginated_data = paginator.get_page(page)
-	for item in paginated_data:
-		print(item)
+
 	serialized_data = [{'name': item.name, 'program': item.programs, 'branch': item.branch.branchName, 
 						'rollNumber': item.roll, 'company': item.company, 
 						'profile': item.profile} for item in paginated_data]

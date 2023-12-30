@@ -42,8 +42,6 @@ def ajax_get_file_list(request):
 @user_passes_test(is_ccd_member,login_url="home:permission_not_granted")
 
 def ajax_upload_file(request):
-    # print(request.method)
-    # print(request.is_ajax())
     if request.is_ajax():
         if request.method == 'POST':
             form = FileUploadForm(data=request.POST, files=request.FILES)
@@ -113,13 +111,9 @@ def ajax_update_database(request):
     context['success']=False
     if request.is_ajax() and request.method=='POST':
         data = json.loads(request.body)
-        # print(data)
         update_type =data['update_type']
-        # print(update_type)
         headings = data['headings']
-        # print(headings)
         data_list = data['data_list']
-        # print(data_list[:2])
         d = {    "Name":"name",
                  "Roll No.":"roll",
                  "Program":'programs',
@@ -133,10 +127,7 @@ def ajax_update_database(request):
                  "Year": 'year_placed',
                 }
         headings_required = ["Name", "Roll No.", "Program","Branch","Day","Company","Placed","Sector","Profile","Slot","Year"]
-        print(sorted(headings))
-        print(sorted(headings_required))
         if sorted(headings)==sorted(headings_required):
-            # print(len(data_list))
             for i in range(len(data_list)):
                 if(len(data_list[i])!=len(headings)):
                     print("list length error for row {}!".format(i+1))
@@ -154,12 +145,10 @@ def ajax_update_database(request):
 
                         else:
                             student_dict[d[h]]= val
-                    print(student_dict)
                     if(student_dict['roll']==''):
                         pass
                     else:
                         # if i<5:
-                        #     print(student_dict)
                         is_exist = Student.objects.filter(roll = student_dict['roll']).count()
                         # branch_exist = Student.objects.filter(branch = student_dict['branch_id']).count()
                         if update_type=="1":
@@ -178,18 +167,13 @@ def ajax_update_database(request):
                                 obj.save()
                         elif update_type=="2":
                             if not is_exist:
-                                print("qwqwqwqw")
                                 obj = Student(**student_dict)
-                                print(obj)
-                                print("sdsdsd")
                                 obj.full_clean()
                                 try:
                                     obj.save()
                                 except:
-                                    print("USSSSSSSSSSISSUE")
+                                    pass
                         elif update_type=="3":
-                            print("fdfvdfv")
-                            print(is_exist)
                             if is_exist:
                                 obj= Student.objects.get(roll=student_dict['roll'])
                                 obj.name = student_dict['name']
@@ -203,11 +187,8 @@ def ajax_update_database(request):
                                 obj.slot = student_dict['slot']
                                 obj.year_placed = student_dict['year_placed']
                                 obj.save()
-                                print(obj)
                             else:
-                                print("Df")
                                 obj = Student.objects.create(**student_dict)
-                                print("done")
                     
 
             context['success']=True
@@ -304,10 +285,8 @@ def student_update(request,pk):
     if request.is_ajax():
         student = get_object_or_404(Student,pk=pk)
         if request.method == 'POST':
-            # print("post student")
             form = StudentForm(request.POST,instance=student)
         else:
-            # print("get student")
             form = StudentForm(instance=student)
         return save_student_form(request,form,'ccd/partial_student_update.html')
 

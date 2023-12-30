@@ -10,7 +10,6 @@ def replace_underscores(string):
     return string.replace('_', ' ')
 @register.filter
 def is_ccd_member(email):
-    # print(email)
     try:
         user = User.objects.get(email=email)
     except Exception as e:
